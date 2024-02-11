@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+        {{ movie.desc|truncatewords:155 }}
+
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{ movie.title }} - CineMatic
+    {% endif %}
+{% endblock %}
+{% block body %}
+<div class="row my_movie_row_class">
+    <div class="mx_auto">
+        <p><a href="{% url 'finalapp:allMovieCat' %}">Home</a>|<a href="{{movie.category.get_url}}">{{movie.category}}</a>{{movie.title}}</p>
+    </div>
+</div>
+<div class="container">
+<br>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem">
+            <img class="my_movie" src="{{movie.poster.url}}" alt="{{movie.title}}">
+        </div>
+        <br>
+    </div>
+    <div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div><br>
+            <h1 class="my_movie_title" style="text-align: center;">{{movie.title}}</h1>
+            <p class="my_title" style="text-align: center;">{{movie.desc}}</p>
+            <ul>
+                <b><p class="text-justify my_movie_text">Release Date:</b> {{movie.release_date}}</p>
+                <b><p class="text-justify">Actors:</b>{{movie.actors}}</p>
+                <b>Genre:</b> {{movie.category}} <br><br>
+                <b>Youtube trailer link:  </b><a href="{{movie.trailer_link}}">movie.trailer_link</a><br>
+                <a href="{% url 'addapp:edit_movie' movie.slug %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'addapp:delete_movie' movie.slug %}" class="btn btn-secondary">Delete</a>
+
+            </ul>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+{% endblock %}
+

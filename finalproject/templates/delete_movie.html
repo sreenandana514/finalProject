@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Movie</title>
+    <!-- Add any additional stylesheets or scripts here -->
+    <style>
+        /* Add your custom styles here */
+    </style>
+</head>
+<body>
+    <h1>Delete Movie</h1>
+    <p>Are you sure you want to delete the following movie?</p>
+    <div>
+        <strong>Title:</strong> {{ movie.title }}<br>
+        <strong>Actors:</strong> {{ movie.actor }}<br>
+        <strong>Release Year:</strong> {{ movie.release_year }}<br>
+        <!-- Add more movie details here if needed -->
+    </div>
+    {% if user == movie.user %}
+    <!-- Display the delete form only if the current user is the one who added the movie -->
+    <form action="/movies/{{ movie.slug }}/delete/" method="POST">
+        {% csrf_token %}
+        <!-- Add a submit button to confirm deletion -->
+        <button type="submit">Delete Movie</button>
+    </form>
+    {% else %}
+    <p>You do not have permission to delete this movie.</p>
+    {% endif %}
+    <!-- Optionally, provide a cancel button to go back -->
+    <a href="{% url 'finalapp:allMovieCat ' %}">Cancel</a>
+    <!-- Add any additional HTML elements or scripts as needed -->
+</body>
+</html>

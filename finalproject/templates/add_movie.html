@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-color:teal;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Add_movie</title>
+</head>
+<body>
+<h3>Add new Movie</h3>
+<form action="{% url 'addapp:add_movie' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title"><br>
+    <input type="text" name="desc" placeholder=" Description"><br>
+    <select id="category" name="category" required>
+            <option value="">Select a category</option>
+            {% for category in categories %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+            {% endfor %}
+    </select><br>
+    <input type="file" name="poster" placeholder="Poster"><br>
+    <input type="date" name="release_date" placeholder="Release Date"><br>
+    <input type="text" name="actors" placeholder="Actors"><br>
+    <input type="url" name="trailer_link" placeholder="Trailer_link"><br>
+    <input type="checkbox" name="available" placeholder="Available">Available<br>
+    <input type="submit">
+
+</form>
+</body>
+</html>
